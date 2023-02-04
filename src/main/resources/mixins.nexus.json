@@ -1,0 +1,12 @@
+{
+  "package": "nexus.mixin",
+  "refmap": "mixins.nexus.refmap.json",
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinNetworkManager"
+  ],
+  "client": [
+    "MixinFontRenderer"
+  ]
+}
