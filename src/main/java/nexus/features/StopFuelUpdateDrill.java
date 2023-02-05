@@ -28,14 +28,13 @@ public class StopFuelUpdateDrill {
 			thing = true;
 		}
 		
-		
 		if(Nexus.mc.currentScreen != null) return;
 		if(event.packet instanceof S2FPacketSetSlot) {
 			if(((S2FPacketSetSlot) event.packet).func_149174_e() == null) return;
 			String currentItem = Utils.getSkyblockItemID(Utils.getExtraAttributes(Nexus.mc.thePlayer.getHeldItem()));
 			List<String> allowedItems = Arrays.asList("GEMSTONE_GAUNTLET", "TITANIUM_DRILL_4");
 			
-			if(allowedItems.contains(currentItem)){
+			if(currentItem != null && allowedItems.contains(currentItem)){
 				event.setCanceled(true);
 			}
 		}

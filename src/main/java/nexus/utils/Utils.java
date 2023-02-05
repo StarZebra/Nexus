@@ -18,7 +18,7 @@ public class Utils {
 	
 	public static NBTTagCompound getExtraAttributes(ItemStack item) {
 		if (item == null) {
-			throw new NullPointerException("The item cannot be null!");
+			return null;
 		}
 		if (!item.hasTagCompound()) {
 			return null;

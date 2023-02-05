@@ -14,6 +14,7 @@ public class Nexus {
 	
 	public static Minecraft mc = Minecraft.getMinecraft();
 	
+	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		ClientCommandHandler.instance.registerCommand(new DrillToggleCommand());
@@ -24,4 +25,5 @@ public class Nexus {
 		
 		MinecraftForge.EVENT_BUS.register(new StopFuelUpdateDrill());
 	}
+	
 }
