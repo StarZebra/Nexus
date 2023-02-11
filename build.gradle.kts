@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "nexus.archloomtemplate"
+group = "Nexus"
 version = "1.0.0"
 
 // Toolchains:
@@ -48,6 +48,7 @@ repositories {
     maven("https://repo.spongepowered.org/maven/")
     // If you don't want to log in with your real minecraft account, remove this line
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven(url = "https://repo.essential.gg/repository/maven-public")
 }
 
 val shadowImpl: Configuration by configurations.creating {
@@ -63,8 +64,10 @@ dependencies {
     shadowImpl("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
         isTransitive = false
     }
-    annotationProcessor("org.spongepowered:mixin:0.8.4-SNAPSHOT")
 
+    annotationProcessor("org.spongepowered:mixin:0.8.4-SNAPSHOT")
+    implementation("gg.essential:vigilance-1.8.9-forge:280")
+    implementation("gg.essential:essential-1.8.9-forge:3662")
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.0")
 

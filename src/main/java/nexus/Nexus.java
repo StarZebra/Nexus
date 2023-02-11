@@ -1,18 +1,30 @@
 package nexus;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import nexus.commands.DrillToggleCommand;
+import nexus.features.AutoTrophyFish;
 import nexus.features.StopFuelUpdateDrill;
+import org.lwjgl.input.Keyboard;
+
+import java.util.HashMap;
 
 @Mod(modid = "Nexus", version = "1.0.0")
 public class Nexus {
 	
 	public static Minecraft mc = Minecraft.getMinecraft();
+	public static boolean devMode = false;
+	public static HashMap<String, KeyBinding> keyBindings = new HashMap<>();
+	
+	public static final String prefix = "§0[§5Nex§dus§0]§r " ;
 	
 	
 	@Mod.EventHandler
@@ -24,6 +36,20 @@ public class Nexus {
 	public void init(FMLInitializationEvent event) {
 		
 		MinecraftForge.EVENT_BUS.register(new StopFuelUpdateDrill());
+		MinecraftForge.EVENT_BUS.register(new AutoTrophyFish());
+		MinecraftForge.EVENT_BUS.register(this);
+		
+		keyBindings.put("Trophy Fish", new KeyBinding("Trophy Fish", Keyboard.KEY_NONE, "Nexus"));
+		for (KeyBinding keyBinding : keyBindings.values()){
+			ClientRegistry.registerKeyBinding(keyBinding);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onKeyPress(InputEvent.KeyInputEvent event){
+		if(keyBindings.get("Trophy Fish").isPressed()){
+			AutoTrophyFish.toggleFishing();
+		}
 	}
 	
 }

@@ -22,7 +22,7 @@ public class DrillToggleCommand extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		StopFuelUpdateDrill.toggled = !StopFuelUpdateDrill.toggled;
-		Nexus.mc.thePlayer.addChatMessage(new ChatComponentText("§0§l[§3§lDrill§0§l]§r " + (StopFuelUpdateDrill.toggled ? "§r§aEnabled" : "§r§4Disabled") + " module."));
+		Nexus.mc.thePlayer.addChatMessage(new ChatComponentText(Nexus.prefix + (StopFuelUpdateDrill.toggled ? "§r§aEnabled" : "§r§4Disabled") + " drill module."));
 	}
 	
 	@Override
