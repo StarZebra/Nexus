@@ -19,19 +19,21 @@ public abstract class MixinFontRenderer {
 	@Shadow
 	protected abstract void renderStringAtPos(String paramString, boolean paramBoolean);
 	
-	@Shadow
-	public abstract int getStringWidth(String paramString);
-	
 	@Inject(method = {"renderStringAtPos"}, at = {@At("HEAD")}, cancellable = true)
 	private void renderString(String text, boolean shadow, CallbackInfo ci) {
+		if(!Nexus.nameChangeToggle) return;
 		if (Utils.inSkyblock() && text != null && text.contains(Nexus.mc.getSession().getUsername())) {
 			ci.cancel();
 			renderStringAtPos(text.replaceAll(Nexus.mc.getSession().getUsername(), "§zJerry"), shadow);
 		}
 	}
 	
+	@Shadow
+	public abstract int getStringWidth(String paramString);
+	
 	@Inject(method = {"getStringWidth"}, at = {@At("RETURN")}, cancellable = true)
 	private void getStringWidth(String text, CallbackInfoReturnable<Integer> cir) {
+		if(!Nexus.nameChangeToggle) return;
 		if (Utils.inSkyblock() && text != null && text.contains(Nexus.mc.getSession().getUsername())) {
 			cir.setReturnValue(getStringWidth(text.replaceAll(Nexus.mc.getSession().getUsername(), "§zJerry")));
 		}

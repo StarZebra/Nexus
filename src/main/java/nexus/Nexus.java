@@ -2,6 +2,7 @@ package nexus;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -23,6 +24,7 @@ public class Nexus {
 	public static Minecraft mc = Minecraft.getMinecraft();
 	public static boolean devMode = false;
 	public static HashMap<String, KeyBinding> keyBindings = new HashMap<>();
+	public static boolean nameChangeToggle = true;
 	
 	public static final String prefix = "§0[§5Nex§dus§0]§r " ;
 	
@@ -39,7 +41,8 @@ public class Nexus {
 		MinecraftForge.EVENT_BUS.register(new AutoTrophyFish());
 		MinecraftForge.EVENT_BUS.register(this);
 		
-		keyBindings.put("Trophy Fish", new KeyBinding("Trophy Fish", Keyboard.KEY_NONE, "Nexus"));
+		registerKeybind("Trophy Fish", Keyboard.KEY_P);
+		registerKeybind("Name Changer");
 		for (KeyBinding keyBinding : keyBindings.values()){
 			ClientRegistry.registerKeyBinding(keyBinding);
 		}
@@ -50,6 +53,15 @@ public class Nexus {
 		if(keyBindings.get("Trophy Fish").isPressed()){
 			AutoTrophyFish.toggleFishing();
 		}
+		if(keyBindings.get("Name Changer").isPressed()){
+			Nexus.nameChangeToggle = !Nexus.nameChangeToggle;
+			mc.thePlayer.addChatMessage(new ChatComponentText(Nexus.prefix + "§fName Changer: " + (Nexus.nameChangeToggle ? "§r§aEnabled" : "§r§4Disabled")));
+		}
+	}
+	
+	private void registerKeybind(String name, int... key){
+		int b = key.length > Keyboard.KEY_NONE ? key[0] : Keyboard.KEY_NONE;
+		keyBindings.put(name, new KeyBinding(name, b, "Nexus"));
 	}
 	
 }
