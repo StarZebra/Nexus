@@ -18,7 +18,7 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.HashMap;
 
-@Mod(modid = "Nexus", version = "1.0.0")
+@Mod(modid = "Nexus", name = "Nexus", version = "1.0.1")
 public class Nexus {
 	
 	public static Minecraft mc = Minecraft.getMinecraft();

@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "Nexus"
-version = "1.0.0"
+version = "1.0.1"
 
 // Toolchains:
 java {
@@ -80,7 +80,7 @@ tasks.withType(JavaCompile::class) {
 }
 
 tasks.withType(Jar::class) {
-    archiveBaseName.set("nexus")
+    archiveBaseName.set("Nexus")
     manifest.attributes.run {
         this["FMLCorePluginContainsFMLMod"] = "true"
         this["ForceLoadAsMod"] = "true"
@@ -93,7 +93,7 @@ tasks.withType(Jar::class) {
 
 
 val remapJar by tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
-    archiveClassifier.set("all")
+    archiveClassifier.set("")
     from(tasks.shadowJar)
     input.set(tasks.shadowJar.get().archiveFile)
 }
