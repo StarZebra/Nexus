@@ -1,6 +1,7 @@
 package nexus.features;
 
 import gg.essential.api.utils.Multithreading;
+import javafx.util.Pair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.Items;
@@ -13,16 +14,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import nexus.Nexus;
 import nexus.events.ReceivePacketEvent;
+import nexus.utils.PlayerRotation;
+import nexus.utils.Utils;
 
 public class AutoTrophyFish extends Feature{
 	
+	private static MovingObjectPosition raytrace = null;
 	public static boolean toggled = false;
-	
+	private static long rotateCooldown = 0L;
 	private static EntityFishHook playersFishHook = null;
 	
 	
 	public static void toggleFishing(){
 		if(!toggled){
+			raytrace = mc.thePlayer.rayTrace(100.0, 1.0f);
 			int rodSlot = getFishingRod();
 			if(rodSlot == -1){
 				mc.thePlayer.addChatMessage(new ChatComponentText(Nexus.prefix +"§cRod not detected in hotbar."));
@@ -30,6 +35,9 @@ public class AutoTrophyFish extends Feature{
 			}
 			mc.thePlayer.inventory.currentItem = rodSlot;
 			mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.getHeldItem());
+			rotateCooldown = System.currentTimeMillis();
+		} else{
+			raytrace = null;
 		}
 		
 		toggled = !toggled;
@@ -113,10 +121,25 @@ public class AutoTrophyFish extends Feature{
 				reelIn(true);
 			}
 		}
+		if(System.currentTimeMillis() - rotateCooldown >= 10000){
+			printdev("Rotating");
+			printdev(String.format("Coords: %s", raytrace.getBlockPos().getX()));
+			float yawOffset = (float)(Math.random() * 5.0D + -2.5D);
+			float pitchOffset = (float)(Math.random() * 5.0D + -2.5D);
+			Pair<Float, Float> yawAndPitch = Utils.blockPosToYawPitch(
+					new BlockPos(raytrace.getBlockPos().getX()+1, raytrace.getBlockPos().getY(), raytrace.getBlockPos().getZ()),
+					mc.thePlayer.getPositionVector());
+			printdev(String.format("OffsetY: %s OffsetX: %s", yawOffset, pitchOffset));
+			new PlayerRotation(
+					new PlayerRotation.Rotation(yawAndPitch.getKey()+pitchOffset, yawAndPitch.getValue()+yawOffset),
+			600L);
+			rotateCooldown = System.currentTimeMillis();
+		}
 	}
 	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event){
 		playersFishHook = null;
+		rotateCooldown = 0L;
 	}
 }
