@@ -27,7 +27,7 @@ Hypixel Skyblock Mod Nexus offers some cool features for the average end-game pl
 </details>
 
 # Links:
-Discord: [Nexus Discord](discord.gg/fCFFSjY3Fc)
+Discord: [Nexus Discord](https://discord.gg/fCFFSjY3Fc)
 
 ## Issues?
 [Here](https://github.com/StarZebra/Nexus/issues/new)
