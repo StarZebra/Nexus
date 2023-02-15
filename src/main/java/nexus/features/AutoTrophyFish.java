@@ -19,6 +19,10 @@ import nexus.utils.Utils;
 
 public class AutoTrophyFish extends Feature{
 	
+	/*
+	Code heavily inspired by https://github.com/AtroxEGO/PaulAddonsKotlin
+	 */
+	
 	private static MovingObjectPosition raytrace = null;
 	public static boolean toggled = false;
 	private static long rotateCooldown = 0L;
