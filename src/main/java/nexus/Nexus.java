@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import nexus.commands.DrillToggleCommand;
+import nexus.commands.SetYawCommand;
 import nexus.features.AutoTrophyFish;
 import nexus.features.StopFuelUpdateDrill;
 import org.lwjgl.input.Keyboard;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 public class Nexus {
 	
 	public static Minecraft mc = Minecraft.getMinecraft();
-	public static boolean devMode = false;
+	public static boolean devMode = true;
 	public static HashMap<String, KeyBinding> keyBindings = new HashMap<>();
 	public static boolean nameChangeToggle = true;
 	
@@ -32,6 +33,7 @@ public class Nexus {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		ClientCommandHandler.instance.registerCommand(new DrillToggleCommand());
+		ClientCommandHandler.instance.registerCommand(new SetYawCommand());
 	}
 	
 	@Mod.EventHandler

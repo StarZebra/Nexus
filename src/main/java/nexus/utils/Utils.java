@@ -48,7 +48,7 @@ public class Utils {
 		double diffY = blockPos.getY() - (playerPos.yCoord +Nexus.mc.thePlayer.getEyeHeight()) + 0.5;
 		double diffZ = blockPos.getZ() - playerPos.zCoord + 0.5;
 		float yaw = (float) Math.toDegrees(Math.atan2(diffZ, diffX)) - 90.0f;
-		float dist = (float) Math.sqrt(diffY*diffX+diffZ*diffZ);
+		float dist = (float) Math.sqrt(diffX*diffX+diffZ*diffZ);
 		float pitch = (float) (-(Math.toDegrees(Math.atan2(diffY, dist))));
 		return new Pair<>(Nexus.mc.thePlayer.rotationYaw + wrapAngleTo180(yaw-Nexus.mc.thePlayer.rotationYaw),
 				Nexus.mc.thePlayer.rotationPitch + wrapAngleTo180(pitch-Nexus.mc.thePlayer.rotationPitch));
