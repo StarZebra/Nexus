@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class Nexus {
 	
 	public static Minecraft mc = Minecraft.getMinecraft();
-	public static boolean devMode = true;
+	public static boolean devMode = false;
 	public static HashMap<String, KeyBinding> keyBindings = new HashMap<>();
 	public static boolean nameChangeToggle = true;
 	
