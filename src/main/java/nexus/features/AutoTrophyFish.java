@@ -1,7 +1,6 @@
 package nexus.features;
 
 import gg.essential.api.utils.Multithreading;
-import javafx.util.Pair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.Items;
@@ -13,6 +12,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import nexus.Nexus;
+import nexus.customclass.Pair;
 import nexus.events.ReceivePacketEvent;
 import nexus.utils.PlayerRotation;
 import nexus.utils.Utils;
@@ -135,7 +135,7 @@ public class AutoTrophyFish extends Feature{
 					mc.thePlayer.getPositionVector());
 			printdev(String.format("OffsetY: %s OffsetX: %s", yawOffset, pitchOffset));
 			new PlayerRotation(
-					new PlayerRotation.Rotation(yawAndPitch.getKey()+pitchOffset, yawAndPitch.getValue()+yawOffset),
+					new PlayerRotation.Rotation(yawAndPitch.getFirst()+pitchOffset, yawAndPitch.getSecond()+yawOffset),
 			600L);
 			rotateCooldown = System.currentTimeMillis();
 		}

@@ -49,6 +49,8 @@ repositories {
     // If you don't want to log in with your real minecraft account, remove this line
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
     maven(url = "https://repo.essential.gg/repository/maven-public")
+    maven("https://repo.sk1er.club/repository/maven-public/")
+    maven("https://repo.sk1er.club/repository/maven-releases/")
 }
 
 val shadowImpl: Configuration by configurations.creating {
@@ -66,7 +68,7 @@ dependencies {
     }
 
     annotationProcessor("org.spongepowered:mixin:0.8.4-SNAPSHOT")
-    implementation("gg.essential:vigilance-1.8.9-forge:280")
+    //implementation("gg.essential:vigilance-1.8.9-forge:280")
     implementation("gg.essential:essential-1.8.9-forge:3662")
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.0")
@@ -80,7 +82,7 @@ tasks.withType(JavaCompile::class) {
 }
 
 tasks.withType(Jar::class) {
-    archiveBaseName.set("Nexus")
+    archiveBaseName.set("nexus")
     manifest.attributes.run {
         this["FMLCorePluginContainsFMLMod"] = "true"
         this["ForceLoadAsMod"] = "true"
@@ -93,7 +95,7 @@ tasks.withType(Jar::class) {
 
 
 val remapJar by tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
-    archiveClassifier.set("release")
+    archiveClassifier.set("all")
     from(tasks.shadowJar)
     input.set(tasks.shadowJar.get().archiveFile)
 }
@@ -108,7 +110,7 @@ tasks.shadowJar {
     }
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
-    fun relocate(name: String) = relocate(name, "com.nexus.deps.$name")
+    fun relocate(name: String) = relocate(name, "nexus.deps.$name")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)
