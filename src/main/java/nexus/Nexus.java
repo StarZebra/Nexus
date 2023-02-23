@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import nexus.commands.DrillToggleCommand;
-import nexus.commands.SetYawCommand;
+import nexus.commands.SetRotationCommand;
 import nexus.features.AutoTrophyFish;
 import nexus.features.StopFuelUpdateDrill;
 import org.lwjgl.input.Keyboard;
@@ -33,7 +33,7 @@ public class Nexus {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		ClientCommandHandler.instance.registerCommand(new DrillToggleCommand());
-		ClientCommandHandler.instance.registerCommand(new SetYawCommand());
+		ClientCommandHandler.instance.registerCommand(new SetRotationCommand());
 	}
 	
 	@Mod.EventHandler
