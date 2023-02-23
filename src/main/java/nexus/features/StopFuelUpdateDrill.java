@@ -39,10 +39,10 @@ public class StopFuelUpdateDrill {
 			}
 		}
 		
-		if(event.packet instanceof S30PacketWindowItems){
+		/*if(event.packet instanceof S30PacketWindowItems){
 			if(((S30PacketWindowItems) event.packet).func_148911_c() != 0) return;
 			event.setCanceled(true);
-		}
+		}*/
 	}
 	
 	
