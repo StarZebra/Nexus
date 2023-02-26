@@ -38,10 +38,6 @@ public class Nexus {
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		
-		System.out.println(System.getProperty("java.class.path"));
-		
-		
 		MinecraftForge.EVENT_BUS.register(new StopFuelUpdateDrill());
 		MinecraftForge.EVENT_BUS.register(new AutoTrophyFish());
 		MinecraftForge.EVENT_BUS.register(this);
