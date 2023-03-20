@@ -1,9 +1,9 @@
 [
   {
-	"modid": "Nexus",
+	"modid": "nexus",
 	"name": "Nexus",
 	"description": "Nexus",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"mcversion": "1.8.9",
 	"url": "https://github.com/StarZebra/Nexus",
 	"updateUrl": "",

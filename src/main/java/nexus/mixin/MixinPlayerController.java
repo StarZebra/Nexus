@@ -8,14 +8,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import java.util.Objects;
+
 @Mixin(PlayerControllerMP.class)
 public class MixinPlayerController {
 
 	@Redirect(method = {"isHittingPosition"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;areItemStackTagsEqual(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"))
 	private boolean shouldTagsBeEqual(ItemStack stackA, ItemStack stackB){
-		if(!StopFuelUpdateDrill.toggled) return ItemStack.areItemStackTagsEqual(stackA, stackB);
-		
-		return Utils.getSkyblockItemID(Utils.getExtraAttributes(stackA)).equals(Utils.getSkyblockItemID(Utils.getExtraAttributes(stackB)));
-		
+		if(StopFuelUpdateDrill.toggled) {
+			return Objects.equals(Utils.getSkyblockItemID(stackA), Utils.getSkyblockItemID(stackB));
+		}
+		return ItemStack.areItemStackTagsEqual(stackA, stackB);
 	}
 }

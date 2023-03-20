@@ -3,6 +3,7 @@ package nexus.utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import nexus.Nexus;
 
@@ -29,12 +30,12 @@ public class Utils {
 		return item.getSubCompound("ExtraAttributes", false);
 	}
 	
-	public static String getSkyblockItemID(NBTTagCompound extraAttributes) {
-		if (extraAttributes == null) {
+	public static String getSkyblockItemID(ItemStack itemStack) {
+		if (getExtraAttributes(itemStack) == null) {
 			return null;
 		}
 		
-		String itemId = extraAttributes.getString("id");
+		String itemId = getExtraAttributes(itemStack).getString("id");
 		if (itemId.equals("")) {
 			return null;
 		}
@@ -59,4 +60,8 @@ public class Utils {
 		return (float) (angle - Math.floor(angle / 360 + 0.5) * 360);
 	}
 	
+	
+	public static void sendClientMessage(String message){
+		Nexus.mc.thePlayer.addChatMessage(new ChatComponentText(Nexus.prefix + message.replace("&", "§")));
+	}
 }
